@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABS Garment Service - Pearl Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: #f0f0f0;
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .size-selection {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .size-btn {
+            padding: 15px 10px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .size-btn.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .size-input-group {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .size-input-group h4 {
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .bill-container {
+            background: white;
+            padding: 30px;
+            border: 2px solid #333;
+            margin: 20px 0;
+        }
+
+        .bill-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #333;
+        }
+
+        .bill-header h2 {
+            font-size: 28px;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .bill-header p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .bill-details {
+            margin: 20px 0;
+        }
+
+        .bill-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 15px;
+        }
+
+        .bill-row strong {
+            color: #333;
+        }
+
+        .bill-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+
+        .bill-table th,
+        .bill-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .bill-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        .bill-total {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .bill-total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .saved-bills-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .bill-card {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .bill-card:hover {
+            background: #f0f0f0;
+            border-color: #667eea;
+        }
+
+        .bill-card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .bill-card-title {
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .bill-card-date {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .bill-card-info {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            color: #667eea;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .bill-container, .bill-container * {
+                visibility: visible;
+            }
+            .bill-container {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ABS Garment Service</h1>
+            <p>Pearl Calculation & Billing System</p>
+        </div>
+
+        <div class="content">
+            <!-- Main Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchMainTab('calculator')">Calculator</button>
+                <button class="tab-btn" onclick="switchMainTab('saved-bills')">Saved Bills</button>
+            </div>
+
+            <!-- Calculator Tab -->
+            <div id="calculator-tab" class="tab-content active">
+                <!-- Mode Selection -->
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchMode('simple')">Simple Mode</button>
+                    <button class="tab-btn" onclick="switchMode('sizewise')">Size-wise Mode</button>
+                </div>
+
+                <!-- Simple Mode -->
+                <div id="simple-mode" class="tab-content active">
+                    <div class="form-group">
+                        <label>Pearls Per Piece</label>
+                        <input type="number" id="simple-pearls" placeholder="Enter pearls per piece" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Quantity Type</label>
+                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                            <button type="button" class="size-btn selected" id="simple-dozens-btn" onclick="toggleSimpleQuantityType('dozens')" style="flex: 1;">Dozens</button>
+                            <button type="button" class="size-btn" id="simple-pieces-btn" onclick="toggleSimpleQuantityType('pieces')" style="flex: 1;">Pieces</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="simple-quantity-label">Quantity (in Dozens)</label>
+                        <input type="number" id="simple-quantity" placeholder="Enter dozens" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Price Per Pearl (Rs)</label>
+                        <input type="number" id="simple-price" placeholder="Enter price per pearl" step="0.01">
+                    </div>
+
+                    <button class="btn btn-primary" onclick="calculateSimple()">Calculate</button>
+                </div>
+
+                <!-- Size-wise Mode -->
+                <div id="sizewise-mode" class="tab-content">
+                    <div class="form-group">
+                        <label>Select Sizes</label>
+                        <div class="size-selection" id="size-buttons">
+                            <!-- Sizes will be generated by JS -->
+                        </div>
+                    </div>
+
+                    <div id="size-inputs-container">
+                        <!-- Dynamic size inputs will appear here -->
+                    </div>
+
+                    <div class="form-group">
+                        <label>Total Quantity Type (for all sizes combined)</label>
+                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                            <button type="button" class="size-btn selected" id="sizewise-dozens-btn" onclick="toggleSizewiseQuantityType('dozens')" style="flex: 1;">Dozens</button>
+                            <button type="button" class="size-btn" id="sizewise-pieces-btn" onclick="toggleSizewiseQuantityType('pieces')" style="flex: 1;">Pieces</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="sizewise-quantity-label">Total Quantity (in Dozens) - All Sizes Combined</label>
+                        <input type="number" id="sizewise-quantity" placeholder="Enter total dozens for all sizes" step="0.01">
+                        <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; margin-top: 10px; border-radius: 5px; font-size: 13px;">
+                            <strong style="color: #856404;">💡 Example:</strong>
+                            <div style="color: #856404; margin-top: 5px; line-height: 1.5;">
+                                Agar aapko <strong>10 dozens total</strong> chahiye aur <strong>3 sizes</strong> select kiye:<br>
+                                • Total pieces: 10 × 12 = <strong>120 pieces</strong><br>
+                                • Har size ko: 120 ÷ 3 = <strong>40 pieces each</strong><br><br>
+                                <strong>Size S:</strong> 20 pearls × 40 pieces = 800 pearls<br>
+                                <strong>Size M:</strong> 25 pearls × 40 pieces = 1,000 pearls<br>
+                                <strong>Size L:</strong> 30 pearls × 40 pieces = 1,200 pearls<br>
+                                <strong>Total Pearls:</strong> 800 + 1,000 + 1,200 = <strong>3,000 pearls</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Price Per Pearl (Rs)</label>
+                        <input type="number" id="sizewise-price" placeholder="Enter price per pearl" step="0.01">
+                    </div>
+
+                    <button class="btn btn-primary" onclick="calculateSizewise()">Calculate</button>
+                </div>
+
+                <!-- Result Display -->
+                <div id="result-container" class="hidden">
+                    <div class="result-box">
+                        <div class="result-item">
+                            <span>Total Pieces:</span>
+                            <span id="result-pieces">0</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Total Pearls:</span>
+                            <span id="result-pearls">0</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Total Amount:</span>
+                            <span id="result-amount">Rs 0.00</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success" onclick="openBillForm()">Generate Bill</button>
+                </div>
+            </div>
+
+            <!-- Saved Bills Tab -->
+            <div id="saved-bills-tab" class="tab-content">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="search-input" placeholder="Search by Name, Bill No, Lot No..." oninput="searchBills()">
+                </div>
+                <div id="saved-bills-list" class="saved-bills-list">
+                    <!-- Saved bills will appear here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bill Form Modal -->
+    <div id="bill-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Generate Bill</h3>
+                <button class="close-btn" onclick="closeBillForm()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Customer / Name</label>
+                    <input type="text" id="bill-customer" placeholder="Optional">
+                </div>
+
+                <div class="form-group">
+                    <label>Bill Number</label>
+                    <input type="text" id="bill-number" placeholder="Optional">
+                </div>
+
+                <div class="form-group">
+                    <label>Lot Number</label>
+                    <input type="text" id="bill-lot" placeholder="Optional">
+                </div>
+
+                <div class="form-group">
+                    <label>Design Number</label>
+                    <input type="text" id="bill-design" placeholder="Optional">
+                </div>
+
+                <div class="form-group">
+                    <label>Challan Number</label>
+                    <input type="text" id="bill-challan" placeholder="Optional">
+                </div>
+
+                <div class="form-group">
+                    <label>Extra Description / Notes</label>
+                    <textarea id="bill-description" placeholder="Add any additional details here... (Optional)" style="width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; min-height: 100px; resize: vertical;"></textarea>
+                </div>
+
+                <button class="btn btn-success" onclick="generateBill()">Create Bill</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bill View Modal -->
+    <div id="bill-view-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Bill Details</h3>
+                <button class="close-btn" onclick="closeBillView()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="bill-preview-container">
+                    <!-- Bill will be rendered here -->
+                </div>
+                <button class="btn btn-success" onclick="downloadBill()">Download as PNG</button>
+                <button class="btn btn-danger" onclick="deleteBill()">Delete Bill</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        // Available sizes
+        const SIZES = ['0', '1', '2', '3', 'S', 'M', 'L', '18', '20', '22', '24', '26', '28', '30', '32', '34', '36', '38', '40'];
+        
+        // State management
+        let currentMode = 'simple';
+        let selectedSizes = [];
+        let calculationResult = null;
+        let currentBillData = null;
+        let simpleQuantityType = 'dozens'; // 'dozens' or 'pieces'
+        let sizewiseQuantityType = 'dozens'; // 'dozens' or 'pieces'
+
+        // Initialize app
+        function init() {
+            generateSizeButtons();
+            loadSavedBills();
+        }
+
+        // Toggle quantity type for simple mode
+        function toggleSimpleQuantityType(type) {
+            simpleQuantityType = type;
+            
+            const dozensBtn = document.getElementById('simple-dozens-btn');
+            const piecesBtn = document.getElementById('simple-pieces-btn');
+            const label = document.getElementById('simple-quantity-label');
+            const input = document.getElementById('simple-quantity');
+            
+            if (type === 'dozens') {
+                dozensBtn.classList.add('selected');
+                piecesBtn.classList.remove('selected');
+                label.textContent = 'Quantity (in Dozens)';
+                input.placeholder = 'Enter dozens';
+            } else {
+                dozensBtn.classList.remove('selected');
+                piecesBtn.classList.add('selected');
+                label.textContent = 'Quantity (in Pieces)';
+                input.placeholder = 'Enter pieces';
+            }
+            
+            // Clear input when switching
+            input.value = '';
+        }
+
+        // Toggle quantity type for sizewise mode
+        function toggleSizewiseQuantityType(type) {
+            sizewiseQuantityType = type;
+            
+            const dozensBtn = document.getElementById('sizewise-dozens-btn');
+            const piecesBtn = document.getElementById('sizewise-pieces-btn');
+            const label = document.getElementById('sizewise-quantity-label');
+            const input = document.getElementById('sizewise-quantity');
+            
+            if (type === 'dozens') {
+                dozensBtn.classList.add('selected');
+                piecesBtn.classList.remove('selected');
+                label.textContent = 'Total Quantity (in Dozens) - All Sizes Combined';
+                input.placeholder = 'Enter total dozens for all sizes';
+            } else {
+                dozensBtn.classList.remove('selected');
+                piecesBtn.classList.add('selected');
+                label.textContent = 'Total Quantity (in Pieces) - All Sizes Combined';
+                input.placeholder = 'Enter total pieces for all sizes';
+            }
+            
+            // Clear input when switching
+            input.value = '';
+        }
+
+        // Generate size selection buttons
+        function generateSizeButtons() {
+            const container = document.getElementById('size-buttons');
+            container.innerHTML = '';
+            
+            SIZES.forEach(size => {
+                const btn = document.createElement('button');
+                btn.className = 'size-btn';
+                btn.textContent = size;
+                btn.onclick = () => toggleSize(size, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        // Toggle size selection
+        function toggleSize(size, btn) {
+            if (selectedSizes.includes(size)) {
+                selectedSizes = selectedSizes.filter(s => s !== size);
+                btn.classList.remove('selected');
+            } else {
+                selectedSizes.push(size);
+                btn.classList.add('selected');
+            }
+            updateSizeInputs();
+        }
+
+        // Update size input fields
+        function updateSizeInputs() {
+            const container = document.getElementById('size-inputs-container');
+            container.innerHTML = '';
+
+            if (selectedSizes.length === 0) {
+                return;
+            }
+
+            selectedSizes.forEach(size => {
+                const div = document.createElement('div');
+                div.className = 'size-input-group';
+                div.innerHTML = `
+                    <h4>Size ${size}</h4>
+                    <input type="number" id="pearls-${size}" placeholder="Pearls per piece for size ${size}" step="0.01">
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Switch main tabs
+        function switchMainTab(tab) {
+            document.querySelectorAll('.tabs .tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.getElementById('calculator-tab').classList.remove('active');
+            document.getElementById('saved-bills-tab').classList.remove('active');
+
+            if (tab === 'calculator') {
+                document.getElementById('calculator-tab').classList.add('active');
+            } else {
+                document.getElementById('saved-bills-tab').classList.add('active');
+                loadSavedBills();
+            }
+        }
+
+        // Switch calculation modes
+        function switchMode(mode) {
+            currentMode = mode;
+            
+            const btns = document.querySelectorAll('#calculator-tab .tabs .tab-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.getElementById('simple-mode').classList.remove('active');
+            document.getElementById('sizewise-mode').classList.remove('active');
+
+            if (mode === 'simple') {
+                document.getElementById('simple-mode').classList.add('active');
+            } else {
+                document.getElementById('sizewise-mode').classList.add('active');
+            }
+
+            // Hide results when switching modes
+            document.getElementById('result-container').classList.add('hidden');
+        }
+
+        // Calculate Simple Mode
+        function calculateSimple() {
+            const pearls = parseFloat(document.getElementById('simple-pearls').value);
+            const quantity = parseFloat(document.getElementById('simple-quantity').value);
+            const price = parseFloat(document.getElementById('simple-price').value);
+
+            if (!pearls || !quantity || !price) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            let totalPieces;
+            let displayQuantity;
+            
+            if (simpleQuantityType === 'dozens') {
+                totalPieces = quantity * 12;
+                displayQuantity = quantity + ' dozens';
+            } else {
+                totalPieces = quantity;
+                displayQuantity = quantity + ' pieces';
+            }
+            
+            const totalPearls = pearls * totalPieces;
+            const totalAmount = totalPearls * price;
+
+            calculationResult = {
+                mode: 'simple',
+                pearls: pearls,
+                quantity: quantity,
+                quantityType: simpleQuantityType,
+                displayQuantity: displayQuantity,
+                price: price,
+                totalPieces: totalPieces,
+                totalPearls: totalPearls,
+                totalAmount: totalAmount,
+                sizes: null
+            };
+
+            displayResult(totalPieces, totalPearls, totalAmount);
+        }
+
+        // Calculate Size-wise Mode
+        function calculateSizewise() {
+            if (selectedSizes.length === 0) {
+                alert('Please select at least one size');
+                return;
+            }
+
+            const quantity = parseFloat(document.getElementById('sizewise-quantity').value);
+            const price = parseFloat(document.getElementById('sizewise-price').value);
+
+            if (!quantity || !price) {
+                alert('Please fill quantity and price fields');
+                return;
+            }
+
+            const sizeData = [];
+            let totalPearls = 0;
+
+            // Get total pieces
+            let totalPieces;
+            let displayQuantity;
+            
+            if (sizewiseQuantityType === 'dozens') {
+                totalPieces = quantity * 12;
+                displayQuantity = quantity + ' dozens';
+            } else {
+                totalPieces = quantity;
+                displayQuantity = quantity + ' pieces';
+            }
+
+            // Divide pieces equally among all sizes
+            const piecesPerSize = totalPieces / selectedSizes.length;
+
+            // Calculate pearls for each size
+            for (let size of selectedSizes) {
+                const pearlsPerPiece = parseFloat(document.getElementById(`pearls-${size}`).value);
+                if (!pearlsPerPiece) {
+                    alert(`Please enter pearls for size ${size}`);
+                    return;
+                }
+                
+                const pearlsForThisSize = pearlsPerPiece * piecesPerSize;
+                totalPearls += pearlsForThisSize;
+                
+                sizeData.push({ 
+                    size: size, 
+                    pearlsPerPiece: pearlsPerPiece,
+                    pieces: piecesPerSize,
+                    totalPearls: pearlsForThisSize
+                });
+            }
+            
+            const totalAmount = totalPearls * price;
+
+            calculationResult = {
+                mode: 'sizewise',
+                quantity: quantity,
+                quantityType: sizewiseQuantityType,
+                displayQuantity: displayQuantity,
+                price: price,
+                totalPieces: totalPieces,
+                totalPearls: totalPearls,
+                totalAmount: totalAmount,
+                sizes: sizeData
+            };
+
+            displayResult(totalPieces, totalPearls, totalAmount);
+        }
+
+        // Display calculation results
+        function displayResult(pieces, pearls, amount) {
+            document.getElementById('result-pieces').textContent = pieces.toLocaleString();
+            document.getElementById('result-pearls').textContent = pearls.toLocaleString('en-IN', {maximumFractionDigits: 2});
+            document.getElementById('result-amount').textContent = 'Rs ' + amount.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('result-container').classList.remove('hidden');
+        }
+
+        // Open bill form modal
+        function openBillForm() {
+            if (!calculationResult) {
+                alert('Please calculate first');
+                return;
+            }
+            document.getElementById('bill-modal').classList.add('active');
+        }
+
+        // Close bill form modal
+        function closeBillForm() {
+            document.getElementById('bill-modal').classList.remove('active');
+        }
+
+        // Generate bill
+        function generateBill() {
+            const customer = document.getElementById('bill-customer').value || 'N/A';
+            const billNumber = document.getElementById('bill-number').value || 'N/A';
+            const lotNumber = document.getElementById('bill-lot').value || 'N/A';
+            const designNumber = document.getElementById('bill-design').value || 'N/A';
+            const challanNumber = document.getElementById('bill-challan').value || 'N/A';
+            const description = document.getElementById('bill-description').value || '';
+
+            const billData = {
+                id: Date.now(),
+                date: new Date().toLocaleString('en-IN'),
+                customer: customer,
+                billNumber: billNumber,
+                lotNumber: lotNumber,
+                designNumber: designNumber,
+                challanNumber: challanNumber,
+                description: description,
+                calculation: calculationResult
+            };
+
+            // Save to localStorage
+            saveBill(billData);
+
+            // Show bill preview
+            currentBillData = billData;
+            renderBill(billData);
+            
+            closeBillForm();
+            document.getElementById('bill-view-modal').classList.add('active');
+
+            // Clear form
+            document.getElementById('bill-customer').value = '';
+            document.getElementById('bill-number').value = '';
+            document.getElementById('bill-lot').value = '';
+            document.getElementById('bill-design').value = '';
+            document.getElementById('bill-challan').value = '';
+            document.getElementById('bill-description').value = '';
+        }
+
+        // Render bill HTML
+        function renderBill(billData) {
+            const container = document.getElementById('bill-preview-container');
+            
+            let sizeTableHTML = '';
+            if (billData.calculation.mode === 'sizewise' && billData.calculation.sizes) {
+                sizeTableHTML = `
+                    <table class="bill-table">
+                        <thead>
+                            <tr>
+                                <th>Size</th>
+                                <th>Pearls/Piece</th>
+                                <th>Pieces</th>
+                                <th>Total Pearls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${billData.calculation.sizes.map(s => `
+                                <tr>
+                                    <td>${s.size}</td>
+                                    <td>${s.pearlsPerPiece.toLocaleString('en-IN', {maximumFractionDigits: 2})}</td>
+                                    <td>${s.pieces.toLocaleString('en-IN', {maximumFractionDigits: 2})}</td>
+                                    <td>${s.totalPearls.toLocaleString('en-IN', {maximumFractionDigits: 2})}</td>
+                                </tr>
+                            `).join('')}
+                            <tr style="background: #f0f0f0; font-weight: 700;">
+                                <td colspan="2">TOTAL</td>
+                                <td>${billData.calculation.totalPieces.toLocaleString('en-IN', {maximumFractionDigits: 2})}</td>
+                                <td>${billData.calculation.totalPearls.toLocaleString('en-IN', {maximumFractionDigits: 2})}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+            } else {
+                sizeTableHTML = `
+                    <div class="bill-row">
+                        <strong>Pearls Per Piece:</strong>
+                        <span>${billData.calculation.pearls.toLocaleString('en-IN', {maximumFractionDigits: 2})}</span>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `
+                <div class="bill-container" id="bill-to-download">
+                    <div class="bill-header">
+                        <h2>ABS GARMENT SERVICE</h2>
+                        <p>Pearl Work Invoice</p>
+                    </div>
+
+                    <div class="bill-details">
+                        <div class="bill-row">
+                            <strong>Date:</strong>
+                            <span>${billData.date}</span>
+                        </div>
+                        ${billData.customer !== 'N/A' ? `
+                        <div class="bill-row">
+                            <strong>Customer:</strong>
+                            <span>${billData.customer}</span>
+                        </div>` : ''}
+                        ${billData.billNumber !== 'N/A' ? `
+                        <div class="bill-row">
+                            <strong>Bill No:</strong>
+                            <span>${billData.billNumber}</span>
+                        </div>` : ''}
+                        ${billData.lotNumber !== 'N/A' ? `
+                        <div class="bill-row">
+                            <strong>Lot No:</strong>
+                            <span>${billData.lotNumber}</span>
+                        </div>` : ''}
+                        ${billData.designNumber !== 'N/A' ? `
+                        <div class="bill-row">
+                            <strong>Design No:</strong>
+                            <span>${billData.designNumber}</span>
+                        </div>` : ''}
+                        ${billData.challanNumber !== 'N/A' ? `
+                        <div class="bill-row">
+                            <strong>Challan No:</strong>
+                            <span>${billData.challanNumber}</span>
+                        </div>` : ''}
+                        ${billData.description && billData.description.trim() !== '' ? `
+                        <div class="bill-row" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e0e0e0; display: block;">
+                            <strong style="display: block; margin-bottom: 8px;">Description / Notes:</strong>
+                            <span style="display: block; white-space: pre-wrap; color: #555; line-height: 1.6;">${billData.description}</span>
+                        </div>` : ''}
+                    </div>
+
+                    <div style="margin: 20px 0; padding: 20px; background: #f9f9f9; border-radius: 10px;">
+                        <h3 style="margin-bottom: 15px; color: #667eea;">Work Details</h3>
+                        ${sizeTableHTML}
+                        <div class="bill-row" style="margin-top: 10px;">
+                            <strong>Quantity:</strong>
+                            <span>${billData.calculation.displayQuantity}</span>
+                        </div>
+                        <div class="bill-row">
+                            <strong>Price Per Pearl:</strong>
+                            <span>Rs ${billData.calculation.price.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                        </div>
+                    </div>
+
+                    <div class="bill-total">
+                        <div class="bill-total-row">
+                            <span>Total Pieces:</span>
+                            <span>${billData.calculation.totalPieces.toLocaleString('en-IN')}</span>
+                        </div>
+                        <div class="bill-total-row">
+                            <span>Total Pearls:</span>
+                            <span>${billData.calculation.totalPearls.toLocaleString('en-IN', {maximumFractionDigits: 2})}</span>
+                        </div>
+                        <div class="bill-total-row" style="font-size: 22px; color: #667eea; padding-top: 15px; border-top: 2px solid #333;">
+                            <span>TOTAL AMOUNT:</span>
+                            <span>Rs ${billData.calculation.totalAmount.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Download bill as PNG
+        function downloadBill() {
+            const billElement = document.getElementById('bill-to-download');
+            
+            html2canvas(billElement, {
+                scale: 2,
+                backgroundColor: '#ffffff',
+                logging: false
+            }).then(canvas => {
+                const link = document.createElement('a');
+                const billNum = currentBillData.billNumber !== 'N/A' ? currentBillData.billNumber : currentBillData.id;
+                link.download = `ABS_Bill_${billNum}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+
+        // Save bill to localStorage
+        function saveBill(billData) {
+            let bills = JSON.parse(localStorage.getItem('abs_bills') || '[]');
+            bills.unshift(billData);
+            localStorage.setItem('abs_bills', JSON.stringify(bills));
+        }
+
+        // Load saved bills
+        function loadSavedBills() {
+            const bills = JSON.parse(localStorage.getItem('abs_bills') || '[]');
+            const container = document.getElementById('saved-bills-list');
+
+            if (bills.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">No saved bills yet</p>';
+                return;
+            }
+
+            container.innerHTML = bills.map(bill => `
+                <div class="bill-card" onclick="viewBill(${bill.id})">
+                    <div class="bill-card-header">
+                        <div class="bill-card-title">
+                            ${bill.customer !== 'N/A' ? bill.customer : 'Bill #' + bill.id}
+                        </div>
+                        <div class="bill-card-date">${bill.date}</div>
+                    </div>
+                    <div class="bill-card-info">
+                        ${bill.billNumber !== 'N/A' ? 'Bill: ' + bill.billNumber + ' | ' : ''}
+                        ${bill.lotNumber !== 'N/A' ? 'Lot: ' + bill.lotNumber + ' | ' : ''}
+                        Amount: Rs ${bill.calculation.totalAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Search bills
+        function searchBills() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const bills = JSON.parse(localStorage.getItem('abs_bills') || '[]');
+
+            const filtered = bills.filter(bill => 
+                bill.customer.toLowerCase().includes(searchTerm) ||
+                bill.billNumber.toLowerCase().includes(searchTerm) ||
+                bill.lotNumber.toLowerCase().includes(searchTerm) ||
+                bill.designNumber.toLowerCase().includes(searchTerm) ||
+                bill.challanNumber.toLowerCase().includes(searchTerm)
+            );
+
+            const container = document.getElementById('saved-bills-list');
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">No bills found</p>';
+                return;
+            }
+
+            container.innerHTML = filtered.map(bill => `
+                <div class="bill-card" onclick="viewBill(${bill.id})">
+                    <div class="bill-card-header">
+                        <div class="bill-card-title">
+                            ${bill.customer !== 'N/A' ? bill.customer : 'Bill #' + bill.id}
+                        </div>
+                        <div class="bill-card-date">${bill.date}</div>
+                    </div>
+                    <div class="bill-card-info">
+                        ${bill.billNumber !== 'N/A' ? 'Bill: ' + bill.billNumber + ' | ' : ''}
+                        ${bill.lotNumber !== 'N/A' ? 'Lot: ' + bill.lotNumber + ' | ' : ''}
+                        Amount: Rs ${bill.calculation.totalAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // View individual bill
+        function viewBill(billId) {
+            const bills = JSON.parse(localStorage.getItem('abs_bills') || '[]');
+            const bill = bills.find(b => b.id === billId);
+            
+            if (bill) {
+                currentBillData = bill;
+                renderBill(bill);
+                document.getElementById('bill-view-modal').classList.add('active');
+            }
+        }
+
+        // Close bill view modal
+        function closeBillView() {
+            document.getElementById('bill-view-modal').classList.remove('active');
+        }
+
+        // Delete bill
+        function deleteBill() {
+            if (!currentBillData) return;
+
+            if (confirm('Are you sure you want to delete this bill?')) {
+                let bills = JSON.parse(localStorage.getItem('abs_bills') || '[]');
+                bills = bills.filter(b => b.id !== currentBillData.id);
+                localStorage.setItem('abs_bills', JSON.stringify(bills));
+                
+                closeBillView();
+                loadSavedBills();
+                alert('Bill deleted successfully');
+            }
+        }
+
+        // Initialize on page load
+        window.onload = init;
+    </script>
+</body>
+</html>
