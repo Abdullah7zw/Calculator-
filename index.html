@@ -19,33 +19,77 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 100%;
+            width: 100%;
             margin: 0 auto;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: 0;
+            box-shadow: none;
             overflow: hidden;
+            min-height: 100vh;
+        }
+
+        /* Desktop/Tablet styles */
+        @media (min-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 800px;
+                width: 90%;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                min-height: auto;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 900px;
+            }
         }
 
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 25px;
+            padding: 20px 15px;
             text-align: center;
         }
 
         .header h1 {
-            font-size: 24px;
+            font-size: 20px;
             margin-bottom: 5px;
         }
 
         .header p {
-            font-size: 14px;
+            font-size: 13px;
             opacity: 0.9;
         }
 
+        /* Responsive header for larger screens */
+        @media (min-width: 768px) {
+            .header {
+                padding: 30px 25px;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
+            
+            .header p {
+                font-size: 15px;
+            }
+        }
+
         .content {
-            padding: 20px;
+            padding: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .content {
+                padding: 25px;
+            }
         }
 
         .tabs {
@@ -56,15 +100,22 @@
 
         .tab-btn {
             flex: 1;
-            padding: 15px;
+            padding: 12px 8px;
             border: none;
             background: #f0f0f0;
             color: #333;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s;
+        }
+
+        @media (min-width: 768px) {
+            .tab-btn {
+                padding: 15px;
+                font-size: 16px;
+            }
         }
 
         .tab-btn.active {
@@ -111,19 +162,33 @@
         .size-selection {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            gap: 8px;
             margin-bottom: 15px;
         }
 
+        @media (min-width: 768px) {
+            .size-selection {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 10px;
+            }
+        }
+
         .size-btn {
-            padding: 15px 10px;
+            padding: 12px 8px;
             border: 2px solid #e0e0e0;
             background: white;
             border-radius: 10px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             transition: all 0.3s;
+        }
+
+        @media (min-width: 768px) {
+            .size-btn {
+                padding: 15px 10px;
+                font-size: 16px;
+            }
         }
 
         .size-btn.selected {
@@ -146,14 +211,21 @@
 
         .btn {
             width: 100%;
-            padding: 18px;
+            padding: 15px;
             border: none;
             border-radius: 10px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             margin-top: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .btn {
+                padding: 18px;
+                font-size: 18px;
+            }
         }
 
         .btn-primary {
@@ -203,76 +275,161 @@
 
         .bill-container {
             background: white;
-            padding: 30px;
+            padding: 15px 12px;
             border: 2px solid #333;
-            margin: 20px 0;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+
+        @media (min-width: 768px) {
+            .bill-container {
+                padding: 20px 18px;
+                margin: 15px 0;
+                font-size: 14px;
+            }
         }
 
         .bill-header {
             text-align: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #333;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+        }
+
+        @media (min-width: 768px) {
+            .bill-header {
+                margin-bottom: 15px;
+                padding-bottom: 12px;
+            }
         }
 
         .bill-header h2 {
-            font-size: 28px;
+            font-size: 20px;
             color: #667eea;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
+        }
+
+        @media (min-width: 768px) {
+            .bill-header h2 {
+                font-size: 24px;
+                margin-bottom: 5px;
+            }
         }
 
         .bill-header p {
-            font-size: 14px;
+            font-size: 11px;
             color: #666;
         }
 
+        @media (min-width: 768px) {
+            .bill-header p {
+                font-size: 12px;
+            }
+        }
+
         .bill-details {
-            margin: 20px 0;
+            margin: 12px 0;
+        }
+
+        @media (min-width: 768px) {
+            .bill-details {
+                margin: 15px 0;
+            }
         }
 
         .bill-row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            font-size: 15px;
+            padding: 5px 0;
+            font-size: 13px;
+        }
+
+        @media (min-width: 768px) {
+            .bill-row {
+                padding: 6px 0;
+                font-size: 14px;
+            }
         }
 
         .bill-row strong {
             color: #333;
+            font-size: 13px;
+        }
+
+        @media (min-width: 768px) {
+            .bill-row strong {
+                font-size: 14px;
+            }
         }
 
         .bill-table {
             width: 100%;
-            margin: 20px 0;
+            margin: 10px 0;
             border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        @media (min-width: 768px) {
+            .bill-table {
+                margin: 12px 0;
+                font-size: 13px;
+            }
         }
 
         .bill-table th,
         .bill-table td {
-            padding: 12px;
+            padding: 6px 4px;
             text-align: left;
             border: 1px solid #ddd;
+        }
+
+        @media (min-width: 768px) {
+            .bill-table th,
+            .bill-table td {
+                padding: 8px 6px;
+            }
         }
 
         .bill-table th {
             background: #667eea;
             color: white;
             font-weight: 600;
+            font-size: 11px;
+        }
+
+        @media (min-width: 768px) {
+            .bill-table th {
+                font-size: 13px;
+            }
         }
 
         .bill-total {
             background: #f9f9f9;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .bill-total {
+                padding: 12px;
+                margin-top: 15px;
+            }
         }
 
         .bill-total-row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            font-size: 18px;
+            padding: 5px 0;
+            font-size: 15px;
             font-weight: 700;
+        }
+
+        @media (min-width: 768px) {
+            .bill-total-row {
+                padding: 6px 0;
+                font-size: 16px;
+            }
         }
 
         .search-container {
@@ -338,22 +495,49 @@
             background: rgba(0,0,0,0.7);
             z-index: 1000;
             overflow-y: auto;
-            padding: 20px;
+            padding: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .modal {
+                padding: 20px;
+            }
         }
 
         .modal.active {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
+            padding-top: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .modal.active {
+                align-items: center;
+                padding-top: 0;
+            }
         }
 
         .modal-content {
             background: white;
             border-radius: 15px;
-            max-width: 600px;
+            max-width: 100%;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
+        }
+
+        @media (min-width: 768px) {
+            .modal-content {
+                max-width: 700px;
+                width: 90%;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .modal-content {
+                max-width: 800px;
+            }
         }
 
         .modal-header {
@@ -536,9 +720,14 @@
                 <button class="close-btn" onclick="closeBillForm()">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label>Customer / Name</label>
-                    <input type="text" id="bill-customer" placeholder="Optional">
+                <div class="form-group" style="background: #f0f7ff; padding: 15px; border-radius: 10px; border: 2px solid #667eea;">
+                    <label style="font-size: 16px; font-weight: 700; color: #667eea; margin-bottom: 10px;">Customer / Party Name</label>
+                    <input type="text" id="bill-customer" placeholder="Enter customer name" style="font-size: 18px; font-weight: 600; border: 2px solid #667eea;">
+                </div>
+
+                <div class="form-group" style="background: #fff4e6; padding: 15px; border-radius: 10px; border: 2px solid #ff9800; margin-top: 15px;">
+                    <label style="font-size: 16px; font-weight: 700; color: #ff9800; margin-bottom: 10px;">Item / Product Name</label>
+                    <input type="text" id="bill-item" placeholder="Enter item name (e.g., Shirt, Dress, Kurta)" style="font-size: 18px; font-weight: 600; border: 2px solid #ff9800;">
                 </div>
 
                 <div class="form-group">
@@ -564,6 +753,77 @@
                 <div class="form-group">
                     <label>Extra Description / Notes</label>
                     <textarea id="bill-description" placeholder="Add any additional details here... (Optional)" style="width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; min-height: 100px; resize: vertical;"></textarea>
+                </div>
+
+                <div class="form-group" style="background: #f0fff4; padding: 15px; border-radius: 10px; border: 2px solid #10b981;">
+                    <label style="font-size: 16px; font-weight: 700; color: #10b981; margin-bottom: 10px;">📸 Upload Picture (Optional)</label>
+                    <input type="file" id="bill-picture" accept="image/*" style="width: 100%; padding: 12px; border: 2px solid #10b981; border-radius: 10px; font-size: 14px;">
+                    <small style="color: #059669; font-size: 13px; display: block; margin-top: 8px;">
+                        Upload a photo of the garment/item for reference
+                    </small>
+                    <div id="picture-preview" style="margin-top: 15px; display: none;">
+                        <img id="preview-image" style="max-width: 100%; max-height: 200px; border-radius: 10px; border: 2px solid #10b981;">
+                        <button type="button" onclick="removePicture()" style="margin-top: 10px; padding: 8px 15px; background: #ef4444; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">Remove Picture</button>
+                    </div>
+                </div>
+
+                <div class="form-group" style="background: #fef3c7; padding: 15px; border-radius: 10px; border: 2px solid #f59e0b; margin-top: 15px;">
+                    <label style="font-size: 16px; font-weight: 700; color: #d97706; margin-bottom: 10px;">💰 Payment & Credit Details</label>
+                    
+                    <div style="margin-bottom: 12px;">
+                        <label style="font-size: 14px; color: #92400e; margin-bottom: 5px; display: block;">
+                            ⏮️ Purana Baqaya / Previous Balance (Rs)
+                        </label>
+                        <input type="number" id="bill-old-balance" placeholder="Pehle se kitna baaki hai? (Optional)" step="0.01" style="width: 100%; padding: 12px; border: 2px solid #f59e0b; border-radius: 10px; font-size: 16px;">
+                        <small style="color: #92400e; font-size: 12px; display: block; margin-top: 4px;">
+                            Agar customer ka pehle se paisa baaki hai to yahan enter karein
+                        </small>
+                    </div>
+                    
+                    <div style="margin-bottom: 12px;">
+                        <label style="font-size: 14px; color: #92400e; margin-bottom: 5px; display: block;">
+                            💵 Advance Payment / Received (Rs)
+                        </label>
+                        <input type="number" id="bill-advance" placeholder="Kitna paisa mila? (Optional)" step="0.01" style="width: 100%; padding: 12px; border: 2px solid #f59e0b; border-radius: 10px; font-size: 16px;">
+                        <small style="color: #92400e; font-size: 12px; display: block; margin-top: 4px;">
+                            Is bill ke liye jo paisa mila wo enter karein
+                        </small>
+                    </div>
+                    
+                    <div id="payment-summary" style="background: white; padding: 15px; border-radius: 8px; margin-top: 12px; display: none; border: 2px solid #f59e0b;">
+                        <h4 style="color: #d97706; font-size: 14px; margin-bottom: 10px; text-align: center; border-bottom: 2px solid #f59e0b; padding-bottom: 8px;">
+                            📊 Payment Summary
+                        </h4>
+                        
+                        <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px;">
+                            <span style="color: #666;">Purana Baqaya:</span>
+                            <span id="summary-old-balance" style="font-weight: 600; color: #dc2626;">Rs 0.00</span>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px;">
+                            <span style="color: #666;">Current Bill:</span>
+                            <span id="summary-current-bill" style="font-weight: 600; color: #667eea;">Rs 0.00</span>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; border-top: 1px solid #e0e0e0; margin-top: 6px; padding-top: 8px;">
+                            <strong style="color: #333;">Total Amount:</strong>
+                            <strong id="summary-total" style="color: #333;">Rs 0.00</strong>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px;">
+                            <span style="color: #10b981;">(-) Advance Paid:</span>
+                            <span id="summary-advance" style="font-weight: 600; color: #10b981;">Rs 0.00</span>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; padding: 10px; font-size: 15px; font-weight: 700; border-radius: 6px; margin-top: 8px;" id="summary-final-box">
+                            <span>FINAL BAQAYA:</span>
+                            <span id="summary-final-balance">Rs 0.00</span>
+                        </div>
+                    </div>
+                    
+                    <small style="color: #92400e; font-size: 13px; display: block; margin-top: 12px;">
+                        💡 Tip: Jaise hi amount enter karenge, automatically calculation dikhai degi
+                    </small>
                 </div>
 
                 <button class="btn btn-success" onclick="generateBill()">Create Bill</button>
@@ -600,11 +860,117 @@
         let currentBillData = null;
         let simpleQuantityType = 'dozens'; // 'dozens' or 'pieces'
         let sizewiseQuantityType = 'dozens'; // 'dozens' or 'pieces'
+        let billPictureData = null; // Store picture as base64
 
         // Initialize app
         function init() {
             generateSizeButtons();
             loadSavedBills();
+            
+            // Add picture upload listener
+            const pictureInput = document.getElementById('bill-picture');
+            if (pictureInput) {
+                pictureInput.addEventListener('change', handlePictureUpload);
+            }
+            
+            // Add payment calculation listeners
+            const oldBalanceInput = document.getElementById('bill-old-balance');
+            const advanceInput = document.getElementById('bill-advance');
+            
+            if (oldBalanceInput) {
+                oldBalanceInput.addEventListener('input', updatePaymentSummary);
+            }
+            if (advanceInput) {
+                advanceInput.addEventListener('input', updatePaymentSummary);
+            }
+        }
+
+        // Update payment summary in real-time
+        function updatePaymentSummary() {
+            if (!calculationResult) return;
+            
+            const oldBalance = parseFloat(document.getElementById('bill-old-balance').value) || 0;
+            const advance = parseFloat(document.getElementById('bill-advance').value) || 0;
+            const currentBill = calculationResult.totalAmount;
+            
+            const totalAmount = oldBalance + currentBill;
+            const finalBalance = totalAmount - advance;
+            
+            const summaryDiv = document.getElementById('payment-summary');
+            
+            // Show summary if any payment data is entered
+            if (oldBalance > 0 || advance > 0) {
+                summaryDiv.style.display = 'block';
+                
+                document.getElementById('summary-old-balance').textContent = 
+                    'Rs ' + oldBalance.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                
+                document.getElementById('summary-current-bill').textContent = 
+                    'Rs ' + currentBill.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                
+                document.getElementById('summary-total').textContent = 
+                    'Rs ' + totalAmount.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                
+                document.getElementById('summary-advance').textContent = 
+                    'Rs ' + advance.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                
+                document.getElementById('summary-final-balance').textContent = 
+                    'Rs ' + Math.max(0, finalBalance).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                
+                // Color code the final balance
+                const finalBox = document.getElementById('summary-final-box');
+                if (finalBalance <= 0) {
+                    finalBox.style.background = '#d1fae5';
+                    finalBox.style.color = '#065f46';
+                    document.getElementById('summary-final-balance').textContent += ' ✓';
+                } else if (finalBalance < totalAmount / 2) {
+                    finalBox.style.background = '#fef3c7';
+                    finalBox.style.color = '#92400e';
+                } else {
+                    finalBox.style.background = '#fee2e2';
+                    finalBox.style.color = '#991b1b';
+                }
+            } else {
+                summaryDiv.style.display = 'none';
+            }
+        }
+
+        // Handle picture upload
+        function handlePictureUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Check if file is an image
+                if (!file.type.startsWith('image/')) {
+                    alert('Please upload an image file');
+                    return;
+                }
+
+                // Check file size (max 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('Image size should be less than 5MB');
+                    return;
+                }
+
+                // Read file and convert to base64
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    billPictureData = e.target.result;
+                    
+                    // Show preview
+                    const preview = document.getElementById('picture-preview');
+                    const previewImg = document.getElementById('preview-image');
+                    previewImg.src = billPictureData;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Remove picture
+        function removePicture() {
+            billPictureData = null;
+            document.getElementById('bill-picture').value = '';
+            document.getElementById('picture-preview').style.display = 'none';
         }
 
         // Toggle quantity type for simple mode
@@ -864,6 +1230,12 @@
                 alert('Please calculate first');
                 return;
             }
+            
+            // Reset payment fields
+            document.getElementById('bill-old-balance').value = '';
+            document.getElementById('bill-advance').value = '';
+            document.getElementById('payment-summary').style.display = 'none';
+            
             document.getElementById('bill-modal').classList.add('active');
         }
 
@@ -875,21 +1247,34 @@
         // Generate bill
         function generateBill() {
             const customer = document.getElementById('bill-customer').value || 'N/A';
+            const itemName = document.getElementById('bill-item').value || 'N/A';
             const billNumber = document.getElementById('bill-number').value || 'N/A';
             const lotNumber = document.getElementById('bill-lot').value || 'N/A';
             const designNumber = document.getElementById('bill-design').value || 'N/A';
             const challanNumber = document.getElementById('bill-challan').value || 'N/A';
             const description = document.getElementById('bill-description').value || '';
+            const oldBalance = parseFloat(document.getElementById('bill-old-balance').value) || 0;
+            const advancePayment = parseFloat(document.getElementById('bill-advance').value) || 0;
+
+            const totalAmount = oldBalance + calculationResult.totalAmount;
+            const finalBalance = totalAmount - advancePayment;
 
             const billData = {
                 id: Date.now(),
                 date: new Date().toLocaleString('en-IN'),
                 customer: customer,
+                itemName: itemName,
                 billNumber: billNumber,
                 lotNumber: lotNumber,
                 designNumber: designNumber,
                 challanNumber: challanNumber,
                 description: description,
+                picture: billPictureData,
+                // Payment details
+                oldBalance: oldBalance,
+                advancePayment: advancePayment,
+                totalAmount: totalAmount,
+                finalBalance: Math.max(0, finalBalance),
                 calculation: calculationResult
             };
 
@@ -905,11 +1290,16 @@
 
             // Clear form
             document.getElementById('bill-customer').value = '';
+            document.getElementById('bill-item').value = '';
             document.getElementById('bill-number').value = '';
             document.getElementById('bill-lot').value = '';
             document.getElementById('bill-design').value = '';
             document.getElementById('bill-challan').value = '';
             document.getElementById('bill-description').value = '';
+            document.getElementById('bill-old-balance').value = '';
+            document.getElementById('bill-advance').value = '';
+            document.getElementById('payment-summary').style.display = 'none';
+            removePicture(); // Clear picture
         }
 
         // Render bill HTML
@@ -967,9 +1357,14 @@
                             <span>${billData.date}</span>
                         </div>
                         ${billData.customer !== 'N/A' ? `
-                        <div class="bill-row">
-                            <strong>Customer:</strong>
-                            <span>${billData.customer}</span>
+                        <div class="bill-row" style="background: #e3f2fd; padding: 8px; margin: 8px -8px; border-left: 4px solid #667eea; font-size: 14px;">
+                            <strong style="color: #667eea; font-size: 12px;">CUSTOMER:</strong>
+                            <span style="font-weight: 700; color: #333; font-size: 15px;">${billData.customer}</span>
+                        </div>` : ''}
+                        ${billData.itemName !== 'N/A' ? `
+                        <div class="bill-row" style="background: #fff3e0; padding: 8px; margin: 8px -8px; border-left: 4px solid #ff9800; font-size: 14px;">
+                            <strong style="color: #ff9800; font-size: 12px;">ITEM:</strong>
+                            <span style="font-weight: 700; color: #333; font-size: 15px;">${billData.itemName}</span>
                         </div>` : ''}
                         ${billData.billNumber !== 'N/A' ? `
                         <div class="bill-row">
@@ -992,16 +1387,21 @@
                             <span>${billData.challanNumber}</span>
                         </div>` : ''}
                         ${billData.description && billData.description.trim() !== '' ? `
-                        <div class="bill-row" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e0e0e0; display: block;">
-                            <strong style="display: block; margin-bottom: 8px;">Description / Notes:</strong>
-                            <span style="display: block; white-space: pre-wrap; color: #555; line-height: 1.6;">${billData.description}</span>
+                        <div class="bill-row" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e0e0e0; display: block;">
+                            <strong style="display: block; margin-bottom: 6px; font-size: 13px;">Description / Notes:</strong>
+                            <span style="display: block; white-space: pre-wrap; color: #555; line-height: 1.5; font-size: 12px;">${billData.description}</span>
+                        </div>` : ''}
+                        ${billData.picture ? `
+                        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e0e0e0; text-align: center;">
+                            <strong style="display: block; margin-bottom: 8px; font-size: 13px; color: #10b981;">📸 Item Picture:</strong>
+                            <img src="${billData.picture}" style="max-width: 100%; max-height: 200px; border-radius: 8px; border: 2px solid #10b981; object-fit: contain;">
                         </div>` : ''}
                     </div>
 
-                    <div style="margin: 20px 0; padding: 20px; background: #f9f9f9; border-radius: 10px;">
-                        <h3 style="margin-bottom: 15px; color: #667eea;">Work Details</h3>
+                    <div style="margin: 12px 0; padding: 12px; background: #f9f9f9; border-radius: 8px;">
+                        <h3 style="margin-bottom: 10px; color: #667eea; font-size: 15px;">Work Details</h3>
                         ${sizeTableHTML}
-                        <div class="bill-row" style="margin-top: 10px;">
+                        <div class="bill-row" style="margin-top: 8px;">
                             <strong>Quantity:</strong>
                             <span>${billData.calculation.displayQuantity}</span>
                         </div>
@@ -1020,10 +1420,41 @@
                             <span>Total Pearls:</span>
                             <span>${billData.calculation.totalPearls.toLocaleString('en-IN', {maximumFractionDigits: 2})}</span>
                         </div>
-                        <div class="bill-total-row" style="font-size: 22px; color: #667eea; padding-top: 15px; border-top: 2px solid #333;">
-                            <span>TOTAL AMOUNT:</span>
+                        <div class="bill-total-row" style="font-size: 15px; color: #667eea; padding-top: 8px; border-top: 2px solid #e0e0e0; margin-top: 6px;">
+                            <span>Current Bill Amount:</span>
                             <span>Rs ${billData.calculation.totalAmount.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                         </div>
+                        ${billData.oldBalance > 0 || billData.advancePayment > 0 ? `
+                        <div style="background: #fef3c7; padding: 10px; border-radius: 6px; margin-top: 10px; border: 2px solid #f59e0b;">
+                            <div style="text-align: center; font-weight: 700; color: #d97706; font-size: 13px; margin-bottom: 8px; border-bottom: 2px solid #f59e0b; padding-bottom: 6px;">
+                                💰 PAYMENT DETAILS
+                            </div>
+                            ${billData.oldBalance > 0 ? `
+                            <div style="display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px;">
+                                <span style="color: #dc2626;">⏮️ Purana Baqaya:</span>
+                                <span style="font-weight: 600; color: #dc2626;">Rs ${billData.oldBalance.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px;">
+                                <span style="color: #667eea;">(+) Current Bill:</span>
+                                <span style="font-weight: 600; color: #667eea;">Rs ${billData.calculation.totalAmount.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; font-weight: 700; border-top: 1px solid #f59e0b; margin-top: 4px; padding-top: 6px;">
+                                <span style="color: #333;">Total Amount:</span>
+                                <span style="color: #333;">Rs ${billData.totalAmount.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                            </div>
+                            ` : ''}
+                            ${billData.advancePayment > 0 ? `
+                            <div style="display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; ${billData.oldBalance > 0 ? '' : 'padding-top: 6px;'}">
+                                <span style="color: #10b981;">(-) Advance Received:</span>
+                                <span style="font-weight: 600; color: #10b981;">Rs ${billData.advancePayment.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                            </div>
+                            ` : ''}
+                            <div style="display: flex; justify-content: space-between; padding: 8px; font-size: 15px; font-weight: 700; border-radius: 6px; margin-top: 8px; ${billData.finalBalance <= 0 ? 'background: #d1fae5; color: #065f46;' : billData.finalBalance < (billData.totalAmount || billData.calculation.totalAmount) / 2 ? 'background: #fff7ed; color: #92400e;' : 'background: #fee2e2; color: #991b1b;'}">
+                                <span>FINAL BAQAYA:</span>
+                                <span>Rs ${billData.finalBalance.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}${billData.finalBalance <= 0 ? ' ✓' : ''}</span>
+                            </div>
+                        </div>
+                        ` : ''}
                     </div>
                 </div>
             `;
